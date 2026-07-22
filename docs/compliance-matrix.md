@@ -26,7 +26,7 @@ GitHub account/URL. Kết quả gate cuối phải được ghi từ run thực 
 | 17 | Quality/exit code (`1183-1230`) | Implemented | `quality.py`, `tests/test_quality.py`, CLI exit mapping | Threshold nghiệp vụ phải được cấu hình rõ |
 | 18 | Export an toàn (`1234-1283`) | Implemented | Formula modes, atomic writer, `--output-root`, secure mode, traversal/symlink tests | OS attacker đổi path đồng thời vẫn cần sandbox/quyền thư mục ở môi trường multi-tenant |
 | 19 | Resource protection (`1287-1306`) | Implemented | `security/resources.py`, chunk CLI/API, memory/ZIP/reject limits, timeout/cancellation tests | Là application guard, không thay OS CPU/RAM quota |
-| 20 | Repository security (`1310-1430`) | Partial/External | `SECURITY.md`, `docs/threat-model.md`, CodeQL/dependency review/Dependabot | Bật secret scanning, PVR, branch protection trong GitHub Settings |
+| 20 | Repository security (`1310-1430`) | Implemented / CI enforcement pending | Security docs/workflows; vulnerability alerts, Dependabot security updates, PVR, secret scanning/push protection và baseline `main` protection đã bật | Required CI checks chờ GitHub Billing cấp runner |
 | 21 | Testing/coverage (`1434-1509`) | Implemented; local gates pass | 311 pass, 2 platform skips; total 89.84%, core 90.56%; gates trong `ci.yml` | GitHub runner chưa khởi chạy do account bị khóa bởi billing; symlink tests skip khi Windows không cấp quyền tạo link |
 | 22 | Documentation/offline install (`1513-1565`) | Implemented | `README.md`, `docs/offline-installation.md`, `docs/examples.md` | Wheelhouse phải tạo đúng OS/CPU/Python đích |
 | 23 | API usability (`1569-1620`) | Implemented | Public helpers trong `__init__.py`, pure functions và type hints/tests | Không monkey-patch pandas |
@@ -34,7 +34,7 @@ GitHub account/URL. Kết quả gate cuối phải được ghi từ run thực 
 | 25 | Logging (`1664-1702`) | Implemented | `logging_utils.py`, CLI flags/integration tests, `tests/test_logging.py`, `docs/logging.md` | Handler do ứng dụng ngoài thêm phải dùng redaction tương đương |
 | 26 | Performance/benchmark (`1706-1728`) | Implemented; run optional | Bounded profiling/resource checks, `read_chunks`, `benchmarks/benchmark.py` | Benchmark lớn không phải CI gate; lưu môi trường/kết quả riêng khi chạy |
 | 27 | Compatibility (`1732-1761`) | Local verification / External blocked | Python 3.11–3.13 matrix; Windows/macOS smoke job; UTF-8/UTF-8 BOM tests | GitHub-hosted jobs chưa được cấp runner vì account bị khóa bởi billing |
-| 28 | License/governance (`1765-1790`) | Implemented locally / External settings | MIT, CONTRIBUTING, CoC, SECURITY, CHANGELOG, templates, release gate và `@carrot1301` trong CODEOWNERS | Xác minh CODEOWNERS và branch rules trên GitHub sau push |
+| 28 | License/governance (`1765-1790`) | Implemented | MIT, governance docs/templates, release gate; GitHub xác nhận CODEOWNERS không lỗi; `main` cấm force-push/xóa branch | Required checks sẽ bật sau khi hosted CI chạy được |
 | 29 | Điều cấm (`1794-1821`) | Implemented | Không web UI/AI/eval/exec/pickle/config plugin; security tests | Review dependency mới trước merge |
 | 30 | Definition of Done (`1825-1872`) | Implemented locally / External verification | Package/CLI/API/tests/docs; local quality, security, build và governance gates pass | Cần CI run xanh, CodeQL/dependency review và GitHub settings thật |
 | 31 | Kế hoạch phase (`1876-1950`) | Implemented theo module | CHANGELOG, architecture, I/O, cleaners, report, profiles, hardening | Release gate tạo SBOM/checksum/hashed platform lock |
@@ -43,15 +43,18 @@ GitHub account/URL. Kết quả gate cuối phải được ghi từ run thực 
 | 34 | Nguồn tham khảo (`2029-2044`) | Implemented | Code gốc MIT; dependency/license gate; không vendor code tham khảo | Maintainer review attribution nếu thêm code ngoài |
 | 35 | Kết quả cuối (`2048-2080`) | Implemented and public | CLI/API default bundle: cleaned, quality JSON/HTML, audit, mapping, rejects, summary; E2E tests; public clone URL | Hosted CI/release còn phụ thuộc trạng thái GitHub Billing |
 
-## Release và GitHub settings bắt buộc
+## Trạng thái release và GitHub settings
 
-Các mục sau không thể hoàn tất bằng cách đoán dữ liệu trong source:
+Đã cấu hình trực tiếp trên public repository:
 
-1. xác minh GitHub nhận diện `@carrot1301` trong `.github/CODEOWNERS`;
-2. bật branch protection/ruleset và yêu cầu CI, CodeQL, dependency review;
-3. bật Private Vulnerability Reporting, secret scanning và dependency graph;
-4. cấu hình môi trường/reviewer release nếu tổ chức yêu cầu;
-5. sau khi mở khóa billing, rerun workflow và lưu URL run xanh.
+1. GitHub nhận diện `@carrot1301` trong `.github/CODEOWNERS` và báo không có lỗi;
+2. vulnerability alerts, Dependabot security updates và dependency graph;
+3. Private Vulnerability Reporting, secret scanning và push protection;
+4. baseline protection cho `main`: linear history, cấm force-push/xóa branch và yêu cầu
+   giải quyết hội thoại trước merge.
+
+Còn phải mở khóa GitHub Billing, rerun CI/CodeQL/dependency review, rồi thêm các check xanh
+đó vào required status checks. Release environment/reviewer là tùy chính sách tài khoản.
 
 `tools/check_release_governance.py` xác minh tag/version và yêu cầu CODEOWNERS thật trước release.
 Workflow release pin action theo full SHA, dùng quyền `contents: write` chỉ ở job publish,
@@ -79,6 +82,7 @@ thời điểm kiểm tra:
 | E2E Excel F&B (`dataclean clean ... --preset fnb`) và bundle 7 artifacts | PASS |
 | Parse bốn workflow YAML + full-SHA action test | PASS |
 | Release governance (`v0.1.0`) | PASS — CODEOWNER `@carrot1301` |
+| GitHub repository security settings | PASS — alerts, security updates, PVR, secret scanning/push protection và baseline branch protection |
 
 Con số trên là snapshot local, không thay thế GitHub run URL hoặc việc audit lại dependency
 tại thời điểm release.
