@@ -1,0 +1,86 @@
+version = 1
+profile = "ecommerce"
+strict = true
+locale = "vi_VN"
+
+[text]
+unicode_form = "NFC"
+repair_mojibake = true
+remove_invisible = true
+line_breaks = "keep"
+trim = true
+
+[type_conversion]
+minimum_success_rate = 0.90
+day_first = true
+decimal_separator = ","
+thousands_separator = "."
+currency = "VND"
+timezone_policy = "preserve"
+min_year = 2000
+max_year = 2100
+excel_serial = true
+invalid = "keep"
+
+[duplicates]
+enabled = false
+action = "report_only"
+subset = ["order_id"]
+keep = "first"
+
+[domain_rules]
+enabled = true
+mode = "report_only"
+absolute_tolerance = 1.0
+relative_tolerance = 0.001
+order_statuses = ["new", "confirmed", "shipping", "completed", "cancelled"]
+payment_statuses = ["unpaid", "paid", "refunded", "failed"]
+shipping_statuses = ["pending", "shipping", "delivered", "returned"]
+
+[columns.order_id]
+type = "identifier"
+required = true
+missing_strategy = "flag_only"
+flag_column = "order_id_was_missing"
+
+[columns.sku]
+type = "identifier"
+required = true
+invalid = "keep"
+
+[columns.quantity]
+type = "integer"
+required = true
+min = 0
+invalid = "keep"
+
+[columns.unit_price]
+type = "currency"
+currency = "VND"
+min = 0
+invalid = "keep"
+
+[columns.shipping_fee]
+type = "currency"
+currency = "VND"
+min = 0
+invalid = "keep"
+
+[columns.order_total]
+type = "currency"
+currency = "VND"
+min = 0
+invalid = "keep"
+
+[columns.email]
+type = "email"
+invalid = "keep"
+
+[columns.phone]
+type = "phone"
+default_country = "VN"
+invalid = "keep"
+
+[columns.created_at]
+type = "datetime"
+invalid = "keep"

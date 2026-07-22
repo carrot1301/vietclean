@@ -1,0 +1,51 @@
+name: Đề xuất tính năng
+description: Đề xuất workflow/rule/định dạng mới và nêu trade-off.
+title: "[Feature]: "
+body:
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Trước khi gửi
+      options:
+        - label: Tôi đã tìm đề xuất tương tự và đọc giới hạn hiện tại.
+          required: true
+        - label: Ví dụ của tôi chỉ dùng dữ liệu tổng hợp, không có PII/secret.
+          required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Vấn đề công việc cần giải quyết
+      description: Mô tả workflow hiện tại và khối lượng thủ công, không chỉ tên giải pháp.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Hành vi/API/CLI đề xuất
+      description: Nêu input, output, mặc định an toàn và ví dụ synthetic.
+    validations:
+      required: true
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Phạm vi nghiệp vụ
+      options:
+        - Generic
+        - F&B
+        - Finance
+        - E-commerce
+        - Marketing
+        - I/O hoặc security chung
+    validations:
+      required: true
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Rủi ro và trade-off
+      description: Offline, dependency, mất dữ liệu, PII, performance, compatibility.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Phương án đã cân nhắc

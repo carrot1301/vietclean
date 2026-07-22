@@ -1,0 +1,72 @@
+version = 1
+profile = "fnb"
+strict = true
+locale = "vi_VN"
+
+[text]
+unicode_form = "NFC"
+repair_mojibake = true
+remove_invisible = true
+line_breaks = "keep"
+trim = true
+
+[type_conversion]
+minimum_success_rate = 0.90
+day_first = true
+decimal_separator = ","
+thousands_separator = "."
+currency = "VND"
+timezone_policy = "preserve"
+min_year = 2000
+max_year = 2100
+excel_serial = true
+invalid = "keep"
+
+[duplicates]
+enabled = false
+action = "report_only"
+subset = ["order_id"]
+keep = "first"
+
+[domain_rules]
+enabled = true
+mode = "report_only"
+absolute_tolerance = 1.0
+relative_tolerance = 0.001
+payment_methods = ["cash", "card", "bank_transfer", "momo", "zalopay"]
+
+[columns.order_id]
+type = "identifier"
+required = true
+missing_strategy = "flag_only"
+flag_column = "order_id_was_missing"
+
+[columns.order_date]
+type = "date"
+required = true
+day_first = true
+invalid = "keep"
+
+[columns.quantity]
+type = "integer"
+required = true
+min = 0
+invalid = "keep"
+
+[columns.unit_price]
+type = "currency"
+currency = "VND"
+required = true
+min = 0
+invalid = "keep"
+
+[columns.total]
+type = "currency"
+currency = "VND"
+min = 0
+invalid = "keep"
+
+[columns.customer_phone]
+type = "phone"
+default_country = "VN"
+invalid = "keep"

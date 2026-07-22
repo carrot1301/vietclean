@@ -1,0 +1,5 @@
+transaction_id,transaction_date,account_code,debit,credit,amount,balance,currency,description
+TX-001,22/07/2026,00101,"1.250.000 VNĐ",0,"1.250.000 VNĐ","10.250.000 VNĐ",VND,"  Thanh toán   nhà cung cấp  "
+TX-002,2026-07-22,00102,0,"850,000 VND","850,000 VND","9.400.000 VNĐ",VND,"PhÃ­ vận chuyển"
+TX-002,03/04/2026,00102,0,N/A,N/A,"9.400.000 VNĐ",VND,"Ngày mơ hồ - cần review"
+TX-004,31/02/2026,00103,0,"$120.00","$120.00","9.280.000 VNĐ",USD,"Marker tiền khác currency cột"

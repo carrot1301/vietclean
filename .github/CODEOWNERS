@@ -1,0 +1,7 @@
+# Default maintainer for the public VietClean repository.
+* @carrot1301
+
+# Security-sensitive code and repository automation require explicit review.
+/.github/ @carrot1301
+/SECURITY.md @carrot1301
+/src/vietclean/security/ @carrot1301

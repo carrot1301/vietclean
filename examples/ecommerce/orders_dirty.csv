@@ -1,0 +1,5 @@
+order_id,created_at,sku,product_name,quantity,unit_price,shipping_fee,order_total,order_status,email,phone,customer_note
+EC-001,22/07/2026 09:30,SKU-001,"  Cà   phê sữa  ",2,"45.000 VNĐ","15.000 VNĐ","105.000 VNĐ",completed,an***@example.invalid,+84900000000,"Giao giờ hành chính"
+EC-002,2026-07-22T10:15:00,SKU-002,"TrÃ  đào",1,"55,000 VND",N/A,"55,000 VND",shipping,b***@example.invalid,0900000000,"=HYPERLINK(""https://example.invalid"",""x"")"
+EC-002,2026-07-22T10:15:00,SKU-002,"TrÃ  đào",1,"55,000 VND",N/A,"55,000 VND",shipping,b***@example.invalid,0900000000,"dòng trùng synthetic"
+,bad-date,SKU-003,"Bánh mì / đặc biệt",-1,"$3.50",0,"$3.50",UNKNOWN,invalid-email,not-a-phone,"cần review"

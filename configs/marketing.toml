@@ -1,0 +1,93 @@
+version = 1
+profile = "marketing"
+strict = true
+locale = "vi_VN"
+
+[text]
+unicode_form = "NFC"
+repair_mojibake = true
+remove_invisible = true
+line_breaks = "keep"
+trim = true
+
+[type_conversion]
+minimum_success_rate = 0.90
+day_first = true
+decimal_separator = ","
+thousands_separator = "."
+currency = "VND"
+timezone_policy = "preserve"
+min_year = 2000
+max_year = 2100
+excel_serial = true
+invalid = "keep"
+
+[duplicates]
+enabled = false
+action = "report_only"
+subset = ["campaign_id", "date", "channel"]
+keep = "first"
+
+[outliers]
+enabled = true
+methods = ["iqr", "zscore"]
+columns = ["spend", "impressions", "clicks", "leads", "conversions", "revenue"]
+action = "report_only"
+
+[domain_rules]
+enabled = true
+mode = "report_only"
+absolute_tolerance = 0.01
+relative_tolerance = 0.001
+kpi_scale = "fraction"
+
+[columns.campaign_id]
+type = "identifier"
+required = true
+missing_strategy = "flag_only"
+flag_column = "campaign_id_was_missing"
+
+[columns.date]
+type = "date"
+required = true
+invalid = "keep"
+
+[columns.spend]
+type = "currency"
+currency = "VND"
+min = 0
+invalid = "keep"
+
+[columns.impressions]
+type = "integer"
+min = 0
+invalid = "keep"
+
+[columns.clicks]
+type = "integer"
+min = 0
+invalid = "keep"
+
+[columns.leads]
+type = "integer"
+min = 0
+invalid = "keep"
+
+[columns.conversions]
+type = "integer"
+min = 0
+invalid = "keep"
+
+[columns.revenue]
+type = "currency"
+currency = "VND"
+min = 0
+invalid = "keep"
+
+[columns.ctr]
+type = "percentage"
+percent_as_fraction = true
+bare_percentage = "reject"
+min = 0
+max = 1
+invalid = "keep"

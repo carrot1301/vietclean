@@ -1,0 +1,36 @@
+{
+  "profile": "ecommerce",
+  "text": {
+    "line_breaks": "space",
+    "repair_mojibake": true
+  },
+  "duplicates": {
+    "enabled": true,
+    "subset": ["mã đơn hàng"],
+    "keep": "first"
+  },
+  "columns": {
+    "email": {
+      "type": "email",
+      "invalid": "missing",
+      "required": true
+    },
+    "số điện thoại": {
+      "type": "phone",
+      "invalid": "keep"
+    },
+    "tổng tiền": {
+      "type": "currency",
+      "min": 0,
+      "invalid": "keep"
+    },
+    "trạng thái": {
+      "type": "category",
+      "map": {
+        "done": "Hoàn tất",
+        "completed": "Hoàn tất",
+        "cancel": "Đã hủy"
+      }
+    }
+  }
+}

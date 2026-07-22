@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vietclean"
+version = "0.1.0"
+description = "Lightweight, offline-first data cleaning for Vietnamese business data"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "VietClean contributors" }]
+keywords = ["data-cleaning", "pandas", "vietnamese", "excel", "csv", "sqlite"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = ["pandas>=1.5", "openpyxl>=3.1"]
+
+[project.optional-dependencies]
+legacy-excel = ["xlrd>=2.0"]
+binary-excel = ["pyxlsb>=1.0.10"]
+sql = ["sqlalchemy>=2.0"]
+parquet = ["pyarrow>=10"]
+all = ["xlrd>=2.0", "pyxlsb>=1.0.10", "sqlalchemy>=2.0", "pyarrow>=10"]
+dev = [
+  "pytest>=7",
+  "pytest-cov>=4",
+  "build>=1",
+  "ruff>=0.4",
+  "mypy>=1.10",
+  "pandas-stubs>=2.0",
+  "bandit>=1.7",
+  "pip-audit>=2.7",
+]
+
+[project.scripts]
+vietclean = "vietclean.cli:main"
+dataclean = "vietclean.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+vietclean = ["py.typed"]
+dataclean = ["py.typed"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.12"
+check_untyped_defs = true
+ignore_missing_imports = true
+no_implicit_optional = true
+warn_unused_ignores = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "build"]

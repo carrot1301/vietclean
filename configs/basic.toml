@@ -1,0 +1,36 @@
+version = 1
+profile = "generic"
+strict = true
+locale = "vi_VN"
+auto_types = true
+
+[text]
+unicode_form = "NFC"
+repair_mojibake = true
+remove_invisible = true
+line_breaks = "keep"
+trim = true
+
+[missing]
+default_strategy = "keep"
+case_sensitive = false
+accent_sensitive = false
+strip_before_match = true
+
+[drop]
+empty_rows = false
+empty_columns = false
+
+[duplicates]
+enabled = false
+action = "report_only"
+keep = "first"
+
+[outliers]
+enabled = false
+methods = ["iqr"]
+action = "report_only"
+
+[domain_rules]
+enabled = false
+mode = "report_only"

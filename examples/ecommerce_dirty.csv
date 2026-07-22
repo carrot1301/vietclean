@@ -1,0 +1,5 @@
+mã đơn hàng,tên khách hàng,email,số điện thoại,tổng tiền,trạng thái,ghi chú
+DH001,"  Nguyễn Văn An  "," AN@EXAMPLE.COM ","090 123 4567","1.250.000 đ",done,"Giao giờ trưa"
+DH002,"Tráº§n Thá»‹ BÃ¬nh",binh.example.com,"(+84) 912-345-678","850,000 VND",completed,"  gọi trước  "
+DH002,"Tráº§n Thá»‹ BÃ¬nh",binh.example.com,"(+84) 912-345-678","850,000 VND",completed,"  gọi trước  "
+DH003,Lê Minh,"N/A","0912 000 111","--",cancel,"N/A"
