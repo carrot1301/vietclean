@@ -8,7 +8,7 @@ GitHub account/URL. Kết quả gate cuối phải được ghi từ run thực 
 | # | Phạm vi trong prompt | Trạng thái | Evidence trong repository | Việc ngoài repository / giới hạn |
 |---:|---|---|---|---|
 | 1 | Vai trò và bài toán (`promt.md:3-42`) | Implemented | `README.md`, package `src/vietclean/` | Tên PyPI chỉ được xác nhận khi đăng ký thật |
-| 2 | Mục tiêu sản phẩm (`46-79`) | Implemented locally / External | CLI `dataclean`/`vietclean`, API file-level, `docs/examples.md` | Cần commit/push remote trước khi người khác clone |
+| 2 | Mục tiêu sản phẩm (`46-79`) | Implemented | CLI `dataclean`/`vietclean`, API file-level, `docs/examples.md`, public repo `carrot1301/vietclean` | Tên PyPI chỉ được xác nhận khi đăng ký thật |
 | 3 | Offline, nhẹ, secure default (`83-192`) | Implemented | `pyproject.toml`, `tests/test_security.py`, `docs/security.md` | Remote DB là opt-in và nằm ngoài air gap |
 | 4 | CSV/Excel/SQL input (`196-303`) | Implemented | `io.py`, CLI `--all-sheets`, chunk mode, I/O/CLI/security tests | Driver `.xls`, Parquet và SQLAlchemy là optional theo môi trường |
 | 5 | Pipeline và API (`306-375`) | Implemented | Pipeline độc lập, CLI và functional API `from dataclean import clean_file` | Chọn nhánh functional API được đặc tả cho phép thay vì fluent loader |
@@ -27,21 +27,21 @@ GitHub account/URL. Kết quả gate cuối phải được ghi từ run thực 
 | 18 | Export an toàn (`1234-1283`) | Implemented | Formula modes, atomic writer, `--output-root`, secure mode, traversal/symlink tests | OS attacker đổi path đồng thời vẫn cần sandbox/quyền thư mục ở môi trường multi-tenant |
 | 19 | Resource protection (`1287-1306`) | Implemented | `security/resources.py`, chunk CLI/API, memory/ZIP/reject limits, timeout/cancellation tests | Là application guard, không thay OS CPU/RAM quota |
 | 20 | Repository security (`1310-1430`) | Partial/External | `SECURITY.md`, `docs/threat-model.md`, CodeQL/dependency review/Dependabot | Bật secret scanning, PVR, branch protection trong GitHub Settings |
-| 21 | Testing/coverage (`1434-1509`) | Implemented; local gates pass | 311 pass, 2 platform skips; total 89.84%, core 90.56%; gates trong `ci.yml` | Cần GitHub CI thực tế; symlink tests skip khi Windows không cấp quyền tạo link |
+| 21 | Testing/coverage (`1434-1509`) | Implemented; local gates pass | 311 pass, 2 platform skips; total 89.84%, core 90.56%; gates trong `ci.yml` | GitHub runner chưa khởi chạy do account bị khóa bởi billing; symlink tests skip khi Windows không cấp quyền tạo link |
 | 22 | Documentation/offline install (`1513-1565`) | Implemented | `README.md`, `docs/offline-installation.md`, `docs/examples.md` | Wheelhouse phải tạo đúng OS/CPU/Python đích |
 | 23 | API usability (`1569-1620`) | Implemented | Public helpers trong `__init__.py`, pure functions và type hints/tests | Không monkey-patch pandas |
 | 24 | Error handling (`1624-1660`) | Implemented | `exceptions.py`, CLI `--debug` và exit mapping, CLI tests | Driver exception trong API phải được caller xử lý/redact |
 | 25 | Logging (`1664-1702`) | Implemented | `logging_utils.py`, CLI flags/integration tests, `tests/test_logging.py`, `docs/logging.md` | Handler do ứng dụng ngoài thêm phải dùng redaction tương đương |
 | 26 | Performance/benchmark (`1706-1728`) | Implemented; run optional | Bounded profiling/resource checks, `read_chunks`, `benchmarks/benchmark.py` | Benchmark lớn không phải CI gate; lưu môi trường/kết quả riêng khi chạy |
-| 27 | Compatibility (`1732-1761`) | Verification pending | Python 3.11–3.13 matrix; Windows/macOS smoke job; UTF-8/UTF-8 BOM tests | GitHub-hosted OS jobs phải chạy thực tế sau push |
+| 27 | Compatibility (`1732-1761`) | Local verification / External blocked | Python 3.11–3.13 matrix; Windows/macOS smoke job; UTF-8/UTF-8 BOM tests | GitHub-hosted jobs chưa được cấp runner vì account bị khóa bởi billing |
 | 28 | License/governance (`1765-1790`) | Implemented locally / External settings | MIT, CONTRIBUTING, CoC, SECURITY, CHANGELOG, templates, release gate và `@carrot1301` trong CODEOWNERS | Xác minh CODEOWNERS và branch rules trên GitHub sau push |
 | 29 | Điều cấm (`1794-1821`) | Implemented | Không web UI/AI/eval/exec/pickle/config plugin; security tests | Review dependency mới trước merge |
 | 30 | Definition of Done (`1825-1872`) | Implemented locally / External verification | Package/CLI/API/tests/docs; local quality, security, build và governance gates pass | Cần CI run xanh, CodeQL/dependency review và GitHub settings thật |
 | 31 | Kế hoạch phase (`1876-1950`) | Implemented theo module | CHANGELOG, architecture, I/O, cleaners, report, profiles, hardening | Release gate tạo SBOM/checksum/hashed platform lock |
-| 32 | Cách tạo repository (`1954-2004`) | Partial/External | Workspace có file đầy đủ, docs lệnh và matrix này | Chủ dự án tạo remote, commit, push và cung cấp URL/output run thật |
+| 32 | Cách tạo repository (`1954-2004`) | Implemented | Public repository `https://github.com/carrot1301/vietclean`, nhánh `main`, docs lệnh và matrix này | GitHub Billing phải được mở khóa để workflow nhận runner |
 | 33 | Quy tắc quyết định (`2008-2025`) | Implemented | Safe defaults trong config/I/O/pipeline, threat model | Destructive option tiếp tục cần explicit opt-in |
 | 34 | Nguồn tham khảo (`2029-2044`) | Implemented | Code gốc MIT; dependency/license gate; không vendor code tham khảo | Maintainer review attribution nếu thêm code ngoài |
-| 35 | Kết quả cuối (`2048-2080`) | Implemented locally | CLI/API default bundle: cleaned, quality JSON/HTML, audit, mapping, rejects, summary; E2E tests | Clone/CI/release URL vẫn cần remote GitHub thật |
+| 35 | Kết quả cuối (`2048-2080`) | Implemented and public | CLI/API default bundle: cleaned, quality JSON/HTML, audit, mapping, rejects, summary; E2E tests; public clone URL | Hosted CI/release còn phụ thuộc trạng thái GitHub Billing |
 
 ## Release và GitHub settings bắt buộc
 
@@ -51,7 +51,7 @@ Các mục sau không thể hoàn tất bằng cách đoán dữ liệu trong so
 2. bật branch protection/ruleset và yêu cầu CI, CodeQL, dependency review;
 3. bật Private Vulnerability Reporting, secret scanning và dependency graph;
 4. cấu hình môi trường/reviewer release nếu tổ chức yêu cầu;
-5. tạo remote, push commit/tag đã review và lưu URL workflow run.
+5. sau khi mở khóa billing, rerun workflow và lưu URL run xanh.
 
 `tools/check_release_governance.py` xác minh tag/version và yêu cầu CODEOWNERS thật trước release.
 Workflow release pin action theo full SHA, dùng quyền `contents: write` chỉ ở job publish,
@@ -83,13 +83,17 @@ thời điểm kiểm tra:
 Con số trên là snapshot local, không thay thế GitHub run URL hoặc việc audit lại dependency
 tại thời điểm release.
 
+Public repository: `https://github.com/carrot1301/vietclean`. Lần push đầu đã tạo CI và
+CodeQL run, nhưng GitHub không cấp runner và trả annotation: account bị khóa do billing.
+Đây là trạng thái tài khoản bên ngoài source; workflow chưa chạy bất kỳ step nào.
+
 ## Gate bên ngoài còn phải ghi sau cùng
 
 Maintainer chỉ đổi các trạng thái `External`/`Verification pending` sau khi lưu được bằng
 chứng thực tế cho:
 
 ```text
-GitHub Actions trên Ubuntu, Windows và macOS
+Mở khóa GitHub Billing và rerun Actions trên Ubuntu, Windows và macOS
 CodeQL + dependency review
 release dry run/checksum/SBOM/hashed lock
 ```

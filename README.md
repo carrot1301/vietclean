@@ -22,10 +22,10 @@ xảy ra khi chính bạn truyền một URI database từ xa.
 
 Yêu cầu Python 3.11 trở lên.
 
-Clone repository bằng URL hiển thị trong nút **Code** trên GitHub, rồi chạy từ thư mục
-checkout:
+Clone public repository rồi chạy từ thư mục checkout:
 
 ```bash
+git clone https://github.com/carrot1301/vietclean.git
 cd vietclean
 python -m venv .venv
 ```
